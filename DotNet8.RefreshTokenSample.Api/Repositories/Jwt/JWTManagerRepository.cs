@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DotNet8.RefreshTokenSample.Api.Repositories
+namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt
 {
     public class JWTManagerRepository : IJWTManagerRepository
     {

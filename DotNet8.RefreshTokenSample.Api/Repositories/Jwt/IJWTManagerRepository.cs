@@ -2,7 +2,7 @@
 using DotNet8.RefreshTokenSample.Api.Utils;
 using System.Security.Claims;
 
-namespace DotNet8.RefreshTokenSample.Api.Repositories
+namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt
 {
     public interface IJWTManagerRepository
     {
