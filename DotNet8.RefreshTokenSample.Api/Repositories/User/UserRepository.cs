@@ -1,5 +1,6 @@
 ﻿using DotNet8.RefreshTokenSample.Api.AppDbContextModels;
 using DotNet8.RefreshTokenSample.Api.Models;
+using DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
 using DotNet8.RefreshTokenSample.Api.Services.SecurityServices;
 using DotNet8.RefreshTokenSample.Api.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -10,27 +11,29 @@ namespace DotNet8.RefreshTokenSample.Api.Repositories.User
     {
         private readonly AppDbContext _context;
         private readonly AesService _aesService;
+        private readonly IJWTManagerRepository _jwtManagerRepository;
 
-        public UserRepository(AppDbContext context, AesService aesService)
+        public UserRepository(AppDbContext context, AesService aesService, IJWTManagerRepository jwtManagerRepository)
         {
             _context = context;
             _aesService = aesService;
+            _jwtManagerRepository = jwtManagerRepository;
         }
 
-        public async Task<Result<JwtResponseModel>> LoginAsync(LoginRequestModel loginRequest, CancellationToken cs)
+        public async Task<Result<Tokens>> LoginAsync(LoginRequestModel loginRequest, CancellationToken cs)
         {
-            Result<JwtResponseModel> result;
+            Result<Tokens> result;
             try
             {
                 var user = await _context.Tbl_User.FirstOrDefaultAsync(x => x.Email == loginRequest.Email && x.Password == loginRequest.Password, cancellationToken: cs);
                 if (user is null)
                 {
-                    result = Result<JwtResponseModel>.NotFound();
+                    result = Result<Tokens>.NotFound();
                     goto result;
                 }
 
                 var jwt = GetJwtResponseModel(user);
-                result = Result<JwtResponseModel>.Success(jwt);
+                result = _jwtManagerRepository.GenerateTokens(jwt);
             }
             catch (Exception ex)
             {

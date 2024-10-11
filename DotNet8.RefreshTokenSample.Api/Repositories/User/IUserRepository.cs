@@ -6,6 +6,6 @@ namespace DotNet8.RefreshTokenSample.Api.Repositories.User
     public interface IUserRepository
     {
 
-        Task<Result<JwtResponseModel>> LoginAsync(LoginRequestModel loginRequest, CancellationToken cs);
+        Task<Result<Tokens>> LoginAsync(LoginRequestModel loginRequest, CancellationToken cs);
     }
 }
