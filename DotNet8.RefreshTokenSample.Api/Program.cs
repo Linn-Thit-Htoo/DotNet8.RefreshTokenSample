@@ -1,4 +1,5 @@
 using DotNet8.RefreshTokenSample.Api.AppDbContextModels;
+using DotNet8.RefreshTokenSample.Api.Dependencies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,11 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(opt =>
-{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
-    opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-}, ServiceLifetime.Transient, ServiceLifetime.Transient);
+builder.Services.AddDependencyInjection(builder);
 
 var app = builder.Build();
 

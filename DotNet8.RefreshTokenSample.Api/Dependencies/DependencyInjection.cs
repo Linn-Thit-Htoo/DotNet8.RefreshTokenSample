@@ -1,11 +1,42 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using DotNet8.RefreshTokenSample.Api.AppDbContextModels;
+using DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
+using DotNet8.RefreshTokenSample.Api.Repositories.User;
+using DotNet8.RefreshTokenSample.Api.Services.AuthServices;
+using DotNet8.RefreshTokenSample.Api.Services.SecurityServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 
 namespace DotNet8.RefreshTokenSample.Api.Dependencies
 {
     public static class DependencyInjection
     {
+        public static IServiceCollection AddDependencyInjection(this IServiceCollection services, WebApplicationBuilder builder)
+        {
+            return services.AddDbContextService(builder).AddDataAccessService()
+                .AddAuthenticationService(builder)
+                .AddCustomServices();
+        }
+
+        private static IServiceCollection AddDbContextService(this IServiceCollection services, WebApplicationBuilder builder)
+        {
+            builder.Services.AddDbContext<AppDbContext>(opt =>
+            {
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+                opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            }, ServiceLifetime.Transient, ServiceLifetime.Transient);
+
+            return services;
+        }
+
+        private static IServiceCollection AddDataAccessService(this IServiceCollection services)
+        {
+            return services.AddScoped<IUserRepository, UserRepository>().AddScoped<IJWTManagerRepository, JWTManagerRepository>();
+        }
+
         private static IServiceCollection AddAuthenticationService(
     this IServiceCollection services,
     WebApplicationBuilder builder
@@ -31,6 +62,11 @@ namespace DotNet8.RefreshTokenSample.Api.Dependencies
                 });
 
             return services;
+        }
+
+        private static IServiceCollection AddCustomServices(this IServiceCollection services)
+        {
+            return services.AddTransient<TokenValidationService>().AddScoped<AesService>();
         }
     }
 }
