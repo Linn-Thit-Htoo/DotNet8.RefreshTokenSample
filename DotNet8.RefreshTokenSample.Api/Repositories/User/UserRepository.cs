@@ -34,6 +34,8 @@ namespace DotNet8.RefreshTokenSample.Api.Repositories.User
 
                 var jwt = GetJwtResponseModel(user);
                 result = _jwtManagerRepository.GenerateTokens(jwt);
+
+                await SaveRefreshTokenAsync(user.UserId, result.Data.RefreshToken, cs);
             }
             catch (Exception ex)
             {
@@ -42,6 +44,39 @@ namespace DotNet8.RefreshTokenSample.Api.Repositories.User
 
         result:
             return result;
+        }
+
+        public async Task SaveRefreshTokenAsync(int userId, string refreshToken, CancellationToken cs)
+        {
+            try
+            {
+                var user = await _context.Tbl_User.FindAsync([userId], cancellationToken: cs);
+                ArgumentNullException.ThrowIfNull(user);
+
+                var login = await _context.Tbl_Login.FirstOrDefaultAsync(x => x.UserId == userId, cancellationToken: cs);
+
+                if (login is null)
+                {
+                    var model = new Tbl_Login
+                    {
+                        UserId = userId,
+                        RefreshToken = refreshToken
+                    };
+
+                    await _context.Tbl_Login.AddAsync(model, cs);
+                }
+                else
+                {
+                    login.RefreshToken = refreshToken;
+                    _context.Tbl_Login.Update(login);
+                }
+
+                await _context.SaveChangesAsync(cs);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         private JwtResponseModel GetJwtResponseModel(Tbl_User tbl_User) => new(
