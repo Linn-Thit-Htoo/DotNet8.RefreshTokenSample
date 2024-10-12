@@ -1,6 +1,6 @@
-﻿using DotNet8.RefreshTokenSample.Api.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+﻿global using DotNet8.RefreshTokenSample.Api.Models;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Security.Claims;
 
 namespace DotNet8.RefreshTokenSample.Api.Features.User;
 
