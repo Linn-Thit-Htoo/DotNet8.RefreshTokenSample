@@ -7,21 +7,30 @@ public class UserController : BaseController
     private readonly IJWTManagerRepository _jwtManagerRepository;
     private readonly IUserRepository _userRepository;
 
-    public UserController(IJWTManagerRepository jwtManagerRepository, IUserRepository userRepository)
+    public UserController(
+        IJWTManagerRepository jwtManagerRepository,
+        IUserRepository userRepository
+    )
     {
         _jwtManagerRepository = jwtManagerRepository;
         _userRepository = userRepository;
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginRequestModel loginRequest, CancellationToken cs)
+    public async Task<IActionResult> Login(
+        [FromBody] LoginRequestModel loginRequest,
+        CancellationToken cs
+    )
     {
         var result = await _userRepository.LoginAsync(loginRequest, cs);
         return Content(result);
     }
 
     [HttpPost("refresh-token")]
-    public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestModel refreshTokenRequest, CancellationToken cs)
+    public async Task<IActionResult> RefreshToken(
+        [FromBody] RefreshTokenRequestModel refreshTokenRequest,
+        CancellationToken cs
+    )
     {
         string authHeader = HttpContext.Request.Headers.Authorization!;
         var header_token = authHeader.Split(" ");
@@ -43,14 +52,22 @@ public class UserController : BaseController
         var tokensResult = _jwtManagerRepository.GenerateTokens(jwt);
 
         // delete refresh token
-        var deleteRefreshTokenResult = await _userRepository.DeleteRefreshTokenAsync(refreshTokenRequest.RefreshToken, refreshTokenRequest.UserId, cs);
+        var deleteRefreshTokenResult = await _userRepository.DeleteRefreshTokenAsync(
+            refreshTokenRequest.RefreshToken,
+            refreshTokenRequest.UserId,
+            cs
+        );
         if (!deleteRefreshTokenResult.IsSuccess)
         {
             return Content(deleteRefreshTokenResult);
         }
 
         // save new refresh token
-        await _userRepository.SaveRefreshTokenAsync(refreshTokenRequest.UserId, tokensResult.Data.RefreshToken, cs);
+        await _userRepository.SaveRefreshTokenAsync(
+            refreshTokenRequest.UserId,
+            tokensResult.Data.RefreshToken,
+            cs
+        );
 
         return Content(tokensResult);
     }
