@@ -13,3 +13,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using System.Security.Claims;
 global using DotNet8.RefreshTokenSample.Api.Shared;
 global using DotNet8.RefreshTokenSample.Api.Utils;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Cryptography;

@@ -1,7 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Cryptography;
-
-namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt
+﻿namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt
 {
     public class JWTManagerRepository : IJWTManagerRepository
     {
