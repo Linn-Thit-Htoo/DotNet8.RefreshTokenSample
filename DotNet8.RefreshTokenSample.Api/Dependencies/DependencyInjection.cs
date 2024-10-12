@@ -4,10 +4,7 @@ using DotNet8.RefreshTokenSample.Api.Repositories.User;
 using DotNet8.RefreshTokenSample.Api.Services.AuthServices;
 using DotNet8.RefreshTokenSample.Api.Services.SecurityServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Runtime.Intrinsics.Arm;
 using System.Text;
 
 namespace DotNet8.RefreshTokenSample.Api.Dependencies
