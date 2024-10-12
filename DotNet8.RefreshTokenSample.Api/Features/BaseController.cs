@@ -1,4 +1,4 @@
-﻿using DotNet8.RefreshTokenSample.Api.Shared;
+﻿global using DotNet8.RefreshTokenSample.Api.Shared;
 
 namespace DotNet8.RefreshTokenSample.Api.Features
 {
