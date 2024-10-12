@@ -2,33 +2,47 @@
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDependencyInjection(this IServiceCollection services, WebApplicationBuilder builder)
+    public static IServiceCollection AddDependencyInjection(
+        this IServiceCollection services,
+        WebApplicationBuilder builder
+    )
     {
-        return services.AddDbContextService(builder).AddDataAccessService()
+        return services
+            .AddDbContextService(builder)
+            .AddDataAccessService()
             .AddAuthenticationService(builder)
             .AddCustomServices();
     }
 
-    private static IServiceCollection AddDbContextService(this IServiceCollection services, WebApplicationBuilder builder)
+    private static IServiceCollection AddDbContextService(
+        this IServiceCollection services,
+        WebApplicationBuilder builder
+    )
     {
-        builder.Services.AddDbContext<AppDbContext>(opt =>
-        {
-            opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
-            opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-        }, ServiceLifetime.Transient, ServiceLifetime.Transient);
+        builder.Services.AddDbContext<AppDbContext>(
+            opt =>
+            {
+                opt.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection"));
+                opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            },
+            ServiceLifetime.Transient,
+            ServiceLifetime.Transient
+        );
 
         return services;
     }
 
     private static IServiceCollection AddDataAccessService(this IServiceCollection services)
     {
-        return services.AddScoped<IUserRepository, UserRepository>().AddScoped<IJWTManagerRepository, JWTManagerRepository>();
+        return services
+            .AddScoped<IUserRepository, UserRepository>()
+            .AddScoped<IJWTManagerRepository, JWTManagerRepository>();
     }
 
     private static IServiceCollection AddAuthenticationService(
-this IServiceCollection services,
-WebApplicationBuilder builder
-)
+        this IServiceCollection services,
+        WebApplicationBuilder builder
+    )
     {
         builder
             .Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
