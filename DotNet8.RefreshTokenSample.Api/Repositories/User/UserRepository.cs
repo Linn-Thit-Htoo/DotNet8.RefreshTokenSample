@@ -20,6 +20,32 @@ namespace DotNet8.RefreshTokenSample.Api.Repositories.User
             _jwtManagerRepository = jwtManagerRepository;
         }
 
+        public async Task<Result<Tokens>> DeleteRefreshTokenAsync(string refreshToken, int userId, CancellationToken cs = default)
+        {
+            Result<Tokens> result;
+            try
+            {
+                var item = await _context.Tbl_Login.FirstOrDefaultAsync(x => x.RefreshToken == refreshToken && x.UserId == userId, cancellationToken: cs);
+                if (item is null)
+                {
+                    result = Result<Tokens>.NotFound();
+                    goto result;
+                }
+
+                _context.Tbl_Login.Remove(item);
+                await _context.SaveChangesAsync(cs);
+
+                result = Result<Tokens>.Success();
+            }
+            catch (Exception ex)
+            {
+                result = Result<Tokens>.Fail(ex);
+            }
+
+        result:
+            return result;
+        }
+
         public async Task<Result<Tokens>> LoginAsync(LoginRequestModel loginRequest, CancellationToken cs)
         {
             Result<Tokens> result;
