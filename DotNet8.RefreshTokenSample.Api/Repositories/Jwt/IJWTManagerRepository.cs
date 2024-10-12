@@ -1,6 +1,4 @@
-﻿using DotNet8.RefreshTokenSample.Api.Utils;
-
-namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
+﻿namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
 
 public interface IJWTManagerRepository
 {
