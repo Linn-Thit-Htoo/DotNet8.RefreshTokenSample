@@ -1,8 +1,4 @@
-﻿global using DotNet8.RefreshTokenSample.Api.Models;
-global using Microsoft.AspNetCore.Mvc;
-global using System.Security.Claims;
-
-namespace DotNet8.RefreshTokenSample.Api.Features.User;
+﻿namespace DotNet8.RefreshTokenSample.Api.Features.User;
 
 [Route("api/account")]
 [ApiController]

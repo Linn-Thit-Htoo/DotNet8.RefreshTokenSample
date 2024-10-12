@@ -8,3 +8,6 @@ global using DotNet8.RefreshTokenSample.Api.Services.SecurityServices;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.IdentityModel.Tokens;
 global using System.Text;
+global using DotNet8.RefreshTokenSample.Api.Models;
+global using Microsoft.AspNetCore.Mvc;
+global using System.Security.Claims;
