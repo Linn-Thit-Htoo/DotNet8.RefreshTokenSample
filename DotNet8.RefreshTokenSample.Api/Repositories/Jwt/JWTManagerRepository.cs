@@ -1,10 +1,5 @@
-﻿using DotNet8.RefreshTokenSample.Api.Models;
-using DotNet8.RefreshTokenSample.Api.Utils;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt
 {
