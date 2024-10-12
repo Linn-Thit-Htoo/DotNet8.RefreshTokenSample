@@ -17,3 +17,4 @@ global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Cryptography;
 global using Newtonsoft.Json;
 global using DotNet8.RefreshTokenSample.Api.Enums;
+global using DotNet8.RefreshTokenSample.Api.Dependencies;

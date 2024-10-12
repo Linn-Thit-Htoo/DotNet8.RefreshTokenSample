@@ -1,5 +1,3 @@
-using DotNet8.RefreshTokenSample.Api.Dependencies;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
