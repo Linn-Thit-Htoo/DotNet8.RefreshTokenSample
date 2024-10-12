@@ -1,7 +1,4 @@
 ﻿using DotNet8.RefreshTokenSample.Api.Models;
-using DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
-using DotNet8.RefreshTokenSample.Api.Repositories.User;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
