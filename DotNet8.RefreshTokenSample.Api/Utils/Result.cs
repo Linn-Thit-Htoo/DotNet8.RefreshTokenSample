@@ -1,6 +1,4 @@
-﻿using DotNet8.RefreshTokenSample.Api.Enums;
-
-namespace DotNet8.RefreshTokenSample.Api.Utils
+﻿namespace DotNet8.RefreshTokenSample.Api.Utils
 {
     public class Result<T>
     {
