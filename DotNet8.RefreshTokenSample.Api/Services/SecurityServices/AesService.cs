@@ -1,7 +1,4 @@
-﻿using System.Security.Cryptography;
-using System.Text;
-
-namespace DotNet8.RefreshTokenSample.Api.Services.SecurityServices
+﻿namespace DotNet8.RefreshTokenSample.Api.Services.SecurityServices
 {
     public class AesService
     {
