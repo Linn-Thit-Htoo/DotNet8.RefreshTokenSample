@@ -1,11 +1,10 @@
 ﻿using DotNet8.RefreshTokenSample.Api.Utils;
 
-namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt
+namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
+
+public interface IJWTManagerRepository
 {
-    public interface IJWTManagerRepository
-    {
-        Result<Tokens> GenerateTokens(JwtResponseModel jwtResponseModel);
-        string GenerateRefreshToken();
-        Result<ClaimsPrincipal> GetClaimsPrincipalFromExpireToken(string token);
-    }
+    Result<Tokens> GenerateTokens(JwtResponseModel jwtResponseModel);
+    string GenerateRefreshToken();
+    Result<ClaimsPrincipal> GetClaimsPrincipalFromExpireToken(string token);
 }
