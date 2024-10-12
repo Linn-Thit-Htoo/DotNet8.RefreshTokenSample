@@ -16,13 +16,17 @@ public class JWTManagerRepository : IJWTManagerRepository
         {
             var claims = new[]
             {
-            new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]!),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
-            new Claim("UserId", jwtResponseModel.UserId),
-            new Claim("UserName", jwtResponseModel.UserName),
-            new Claim("Email", jwtResponseModel.Email)
-        };
+                new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]!),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(
+                    JwtRegisteredClaimNames.Iat,
+                    new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(),
+                    ClaimValueTypes.Integer64
+                ),
+                new Claim("UserId", jwtResponseModel.UserId),
+                new Claim("UserName", jwtResponseModel.UserName),
+                new Claim("Email", jwtResponseModel.Email)
+            };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]!));
             var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -37,11 +41,7 @@ public class JWTManagerRepository : IJWTManagerRepository
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
             var refreshToken = GenerateRefreshToken();
 
-            var model = new Tokens
-            {
-                AccessToken = accessToken,
-                RefreshToken = refreshToken
-            };
+            var model = new Tokens { AccessToken = accessToken, RefreshToken = refreshToken };
 
             result = Result<Tokens>.Success(model);
         }
@@ -71,9 +71,19 @@ public class JWTManagerRepository : IJWTManagerRepository
                 ValidAudience = _configuration.GetSection("Jwt:Audience").Value
             };
             var tokenHandler = new JwtSecurityTokenHandler();
-            var principal = tokenHandler.ValidateToken(token, tokenValidParameter, out SecurityToken securityToken);
+            var principal = tokenHandler.ValidateToken(
+                token,
+                tokenValidParameter,
+                out SecurityToken securityToken
+            );
             var jwtSecurityToken = securityToken as JwtSecurityToken;
-            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            if (
+                jwtSecurityToken == null
+                || !jwtSecurityToken.Header.Alg.Equals(
+                    SecurityAlgorithms.HmacSha256,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             {
                 throw new SecurityTokenException("Invalid token");
             }
