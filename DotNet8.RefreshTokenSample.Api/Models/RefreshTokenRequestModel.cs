@@ -1,8 +1,7 @@
-﻿namespace DotNet8.RefreshTokenSample.Api.Models
+﻿namespace DotNet8.RefreshTokenSample.Api.Models;
+
+public class RefreshTokenRequestModel
 {
-    public class RefreshTokenRequestModel
-    {
-        public int UserId { get; set; }
-        public string RefreshToken { get; set; }
-    }
+    public int UserId { get; set; }
+    public string RefreshToken { get; set; }
 }
