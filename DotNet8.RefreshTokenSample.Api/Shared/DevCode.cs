@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace DotNet8.RefreshTokenSample.Api.Shared
+﻿namespace DotNet8.RefreshTokenSample.Api.Shared
 {
     public static class DevCode
     {
