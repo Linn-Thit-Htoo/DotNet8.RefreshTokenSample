@@ -1,11 +1,11 @@
-﻿using DotNet8.RefreshTokenSample.Api.AppDbContextModels;
-using DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
-using DotNet8.RefreshTokenSample.Api.Repositories.User;
-using DotNet8.RefreshTokenSample.Api.Services.AuthServices;
-using DotNet8.RefreshTokenSample.Api.Services.SecurityServices;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
+﻿global using DotNet8.RefreshTokenSample.Api.AppDbContextModels;
+global using DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
+global using DotNet8.RefreshTokenSample.Api.Repositories.User;
+global using DotNet8.RefreshTokenSample.Api.Services.AuthServices;
+global using DotNet8.RefreshTokenSample.Api.Services.SecurityServices;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.IdentityModel.Tokens;
+global using System.Text;
 
 namespace DotNet8.RefreshTokenSample.Api.Dependencies;
 
