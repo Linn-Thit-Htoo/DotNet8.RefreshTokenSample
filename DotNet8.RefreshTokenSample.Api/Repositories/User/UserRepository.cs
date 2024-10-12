@@ -65,7 +65,7 @@ namespace DotNet8.RefreshTokenSample.Api.Repositories.User
             }
             catch (Exception ex)
             {
-                throw;
+                result = Result<Tokens>.Fail(ex);
             }
 
         result:
