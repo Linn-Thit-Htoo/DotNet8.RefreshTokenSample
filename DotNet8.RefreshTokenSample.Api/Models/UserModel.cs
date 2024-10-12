@@ -1,10 +1,9 @@
-﻿namespace DotNet8.RefreshTokenSample.Api.Models
+﻿namespace DotNet8.RefreshTokenSample.Api.Models;
+
+public class UserModel
 {
-    public class UserModel
-    {
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-    }
+    public int UserId { get; set; }
+    public string UserName { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
 }
