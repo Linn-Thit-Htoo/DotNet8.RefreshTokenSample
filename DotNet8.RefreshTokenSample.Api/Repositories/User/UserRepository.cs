@@ -1,11 +1,4 @@
-﻿using DotNet8.RefreshTokenSample.Api.AppDbContextModels;
-using DotNet8.RefreshTokenSample.Api.Models;
-using DotNet8.RefreshTokenSample.Api.Repositories.Jwt;
-using DotNet8.RefreshTokenSample.Api.Services.SecurityServices;
-using DotNet8.RefreshTokenSample.Api.Utils;
-using Microsoft.EntityFrameworkCore;
-
-namespace DotNet8.RefreshTokenSample.Api.Repositories.User
+﻿namespace DotNet8.RefreshTokenSample.Api.Repositories.User
 {
     public class UserRepository : IUserRepository
     {
