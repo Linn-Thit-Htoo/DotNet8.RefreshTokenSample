@@ -8,6 +8,6 @@ namespace DotNet8.RefreshTokenSample.Api.Repositories.Jwt
     {
         Result<Tokens> GenerateTokens(JwtResponseModel jwtResponseModel);
         string GenerateRefreshToken();
-        ClaimsPrincipal GetClaimsPrincipalFromExpireToken(string token);
+        Result<ClaimsPrincipal> GetClaimsPrincipalFromExpireToken(string token);
     }
 }
