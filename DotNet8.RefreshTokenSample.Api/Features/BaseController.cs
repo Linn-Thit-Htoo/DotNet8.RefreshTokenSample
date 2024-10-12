@@ -1,6 +1,4 @@
-﻿global using DotNet8.RefreshTokenSample.Api.Shared;
-
-namespace DotNet8.RefreshTokenSample.Api.Features
+﻿namespace DotNet8.RefreshTokenSample.Api.Features
 {
     [Route("api/[controller]")]
     [ApiController]
