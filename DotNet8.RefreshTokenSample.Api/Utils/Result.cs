@@ -8,13 +8,32 @@ public class Result<T>
     public EnumStatusCode StatusCode { get; set; }
 
     public static Result<T> Success(string message = "Success.") =>
-        new Result<T> { Message = message, IsSuccess = true, StatusCode = EnumStatusCode.Success };
+        new Result<T>
+        {
+            Message = message,
+            IsSuccess = true,
+            StatusCode = EnumStatusCode.Success
+        };
 
     public static Result<T> Success(T data, string message = "Success.") =>
-        new Result<T> { Message = message, Data = data, IsSuccess = true, StatusCode = EnumStatusCode.Success };
+        new Result<T>
+        {
+            Message = message,
+            Data = data,
+            IsSuccess = true,
+            StatusCode = EnumStatusCode.Success
+        };
 
-    public static Result<T> Fail(string message = "Fail.", EnumStatusCode statusCode = EnumStatusCode.BadRequest) =>
-        new Result<T> { Message = message, IsSuccess = false, StatusCode = statusCode };
+    public static Result<T> Fail(
+        string message = "Fail.",
+        EnumStatusCode statusCode = EnumStatusCode.BadRequest
+    ) =>
+        new Result<T>
+        {
+            Message = message,
+            IsSuccess = false,
+            StatusCode = statusCode
+        };
 
     public static Result<T> Fail(Exception ex) =>
         Result<T>.Fail(ex.ToString(), EnumStatusCode.InternalServerError);
