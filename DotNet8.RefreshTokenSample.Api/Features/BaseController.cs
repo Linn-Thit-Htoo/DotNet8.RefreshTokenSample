@@ -1,6 +1,4 @@
 ﻿using DotNet8.RefreshTokenSample.Api.Shared;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
 namespace DotNet8.RefreshTokenSample.Api.Features
 {
