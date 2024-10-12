@@ -1,10 +1,4 @@
-﻿using DotNet8.RefreshTokenSample.Api.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
-namespace DotNet8.RefreshTokenSample.Api.Services.AuthServices
+﻿namespace DotNet8.RefreshTokenSample.Api.Services.AuthServices
 {
     public class JWTAuth
     {
