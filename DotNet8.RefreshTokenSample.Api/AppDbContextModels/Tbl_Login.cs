@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace DotNet8.RefreshTokenSample.Api.AppDbContextModels
+﻿namespace DotNet8.RefreshTokenSample.Api.AppDbContextModels
 {
     public class Tbl_Login
     {
